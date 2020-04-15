@@ -24,7 +24,9 @@ do
 	ssh root@$ip "yum -y install mysql-community-server"
 	ssh root@$ip "systemctl start mysqld; systemctl enable mysqld"
 	ssh root@$ip "grep 'temporary password' /var/log/mysqld.log |awk '{print \$NF}' > /root/mysqloldpass.txt"
-	ssh root@$ip "mysqladmin -uroot -p'`cat /root/mysqloldpass.txt`' password '123456'"
+	#»á³ö´í
+	# ssh root@$ip "mysqladmin -uroot -p'`cat /root/mysqloldpass.txt`' password '123456'"
+	ssh root@$ip 'mysqladmin -uroot -p"`cat /root/mysqloldpass.txt`" password "123456"'
 	}&
 
 done < /root/scripts/ip.txt
